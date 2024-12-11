@@ -2,4 +2,4 @@ joblib
 pandas
 numpy
 tensorflow
-sklearn.preprocessing
+scikit-learn
