@@ -19,37 +19,145 @@ gpus = ['radeon', 'geforce 3050', 'iris xe', 'uhd 620', 'geforce 2050', 'geforce
 gpu_brands = ['AMD', 'Nvidia', 'Intel', 'Apple', 'Qualcomm']
 
 
+cpu_img = 'cpu.png'
+adapter_img = 'adapter.png'
+display_img = 'display.png'
+gpu_img = 'gpu.png'
+ram_img = 'ram.png'
+storage_img = 'storage.png'
 
-neural_model = tf.keras.models.load_model('c:\\Kaggle laptop\\laptop_model.keras')
-with open('random_forest_model.pkl', 'rb') as f:
-    rfc_model = pickle.load(f)
-with open('linear_regression_model.pkl', 'rb') as f:
-    lr_model = pickle.load(f)
 
+st.markdown(
+    """
+    <style>
+    /* Body background */
+    body {
+        background-color: #f0f0f0;  /* light gray color */
+        margin: 0;
+    }
+    
+    /* Title background image */
+    .title-container {
+        background-image: url('https://www.notebookwebshop.hu/user/categories/orig/gaming-laptops-og-image.png');
+        background-size: cover;
+        background-position: center;
+        height: 400px;  /* Adjust the height as needed */
+        color: white;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 40px;
+    }
+    
+    /* Making sure that after the title, the background disappears */
+    .content {
+        background-color: white;
+        padding-top: 0px;  /* Adjust as needed */
+    }
 
-st.title("Laptop Price Prediction")
-st.header("Enter the specs")
+    /* Remove extra space under images */
+    img {
+        display: block;
+        margin: 0;
+    }
+    
+    .title-container h1 {
+        font-size: 60px;
+        margin: 0;
+    }
+    </style>
+    """, unsafe_allow_html=True
+)
 
+#st.title("Laptop Price Prediction")
+#st.header("Enter the specs")
+
+st.markdown('<div class="title-container"><h1>Laptop Price Prediction</h1></div>', unsafe_allow_html=True)
+st.markdown('<div class="content">', unsafe_allow_html=True)
+
+#st.header("Enter the specs")
+st.markdown('</div>', unsafe_allow_html=True)
 
 in_brand = st.selectbox("Brand", options=brands)
+st.markdown("---")
+col1, col2 = st.columns([1,8])
+st.markdown("---")
+col3, col4 = st.columns([1,8])
+st.markdown("---")
+col5, col6 = st.columns([1,8])
+st.markdown("---")
+col7, col8 = st.columns([1,8])
+st.markdown("---")
+col9, col10 = st.columns([1,8])
+st.markdown("---")
+col11, col12 = st.columns([1,8])
+st.markdown("---")
 
-in_processor_name = st.selectbox("Processor Name", options=processors)
+with col1:
+    st.image(cpu_img, width=75)
+    #st.markdown(rounded_image(cpu_img, 75), unsafe_allow_html=True)
+with col2:
+    in_processor_name = st.selectbox("Processor Name", options=processors)
 
-in_ram_expandable = st.slider("RAM Expandable (GB)", 0, 64, 0)
-in_ram = st.slider("RAM (GB)", 0, 64, 0)
+with col1:
+    st.image(cpu_img, width=75)
+with col2:
+    in_ghz = st.number_input("Processor Speed (GHz)", min_value=0.0, max_value=5.0, step=0.1, format="%.1f")
 
-in_ghz = st.number_input("Processor Speed (GHz)", min_value=0.0, max_value=5.0, step=0.1, format="%.1f")
 
-in_display_type = st.selectbox("Display Type", options=display_types)
-in_display_size = st.number_input("Display Size (inches)", min_value=10.0, max_value=20.0, step=0.1, format="%.1f")
+#in_ram_expandable = st.slider("RAM Expandable (GB)", 0, 64, 0)
+with col3:
+    st.image(ram_img, width=75)
+with col4:
+    in_ram_expandable = st.number_input("RAM Expandable (GB)", min_value=0.0, max_value=32.0, step=1.0, format="%.0f")
 
-in_gpu_brand = st.selectbox("GPU Brand", options=gpu_brands)
-in_gpu = st.selectbox("GPU", options=gpus)
+#in_ram = st.slider("RAM (GB)", 0, 64, 0)
+with col3:
+    st.image(ram_img, width=75)
+with col4:
+    in_ram = st.number_input("RAM (GB)", min_value=0.0, max_value=32.0, step=1.0, format="%.0f")
 
-in_ssd = st.selectbox("SSD", [0, 16, 32, 64, 128, 256, 512, 1024])
-in_hdd = st.selectbox("HDD", [0, 500, 1024, 2048])
 
-in_adapter = st.slider("Adapter Power (W)", 0, 400, 0)
+
+with col5:
+    st.image(display_img, width=75)
+with col6:
+    in_display_type = st.selectbox("Display Type", options=display_types)
+
+with col5:
+    st.image(display_img, width=75)
+with col6:
+    in_display_size = st.number_input("Display Size (inches)", min_value=10.0, max_value=20.0, step=0.1, format="%.1f")
+
+
+with col7:
+    st.image(gpu_img, width=75)
+with col8:
+    in_gpu_brand = st.selectbox("GPU Brand", options=gpu_brands)
+
+with col7:
+    st.image(gpu_img, width=75)
+with col8:
+    in_gpu = st.selectbox("GPU", options=gpus)
+
+
+with col9:
+    st.image(storage_img, width=75)
+with col10:
+    in_ssd = st.selectbox("SSD", [0, 16, 32, 64, 128, 256, 512, 1024])
+
+with col9:
+    st.image(storage_img, width=75)
+with col10:
+    in_hdd = st.selectbox("HDD", [0, 500, 1024, 2048])
+
+
+with col11:
+    st.image(adapter_img, width=75)
+with col12:
+    in_adapter = st.slider("Adapter Power (W)", 0, 400, 0)
 
 
 values = np.array([in_brand, in_processor_name, in_ram_expandable, in_ram, in_ghz, in_display_type, in_display_size, in_gpu, in_gpu_brand, in_ssd, in_hdd, in_adapter])
@@ -73,9 +181,16 @@ df[columns_to_scale] = scaler.transform(df[columns_to_scale])
 
 
 if st.button("Predict"):
+    neural_model = tf.keras.models.load_model('c:\\Kaggle laptop\\laptop_model.keras')
+    with open('random_forest_model.pkl', 'rb') as f:
+        rfc_model = pickle.load(f)
+    with open('linear_regression_model.pkl', 'rb') as f:
+        lr_model = pickle.load(f)
     #neural_prediction = neural_model.predict(df)
     #linear_prediction = lr_model.predict(df)
     rfc_prediction = rfc_model.predict(df)
     #avg_prediction = (neural_prediction + linear_prediction + rfc_prediction) / 3
     #st.write(f"Predicted value: {4.6 * avg_prediction[0][0]:.2f} ft")
-    st.write(f"Predicted price: {4.6 * rfc_prediction[0][0]:.2f} ft")
+    predicted_price = 4.2 *rfc_prediction[0]
+    st.markdown(f'<h2 style="color: white; text-align: center;">Predicted Price: <strong>{predicted_price:.2f} ft</strong></h2>', unsafe_allow_html=True)
+    #st.write(f"Predicted price: {4.2 * rfc_prediction[0]:.2f} ft")
