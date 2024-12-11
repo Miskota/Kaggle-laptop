@@ -1,5 +1,4 @@
 joblib
-pickle
 pandas
 numpy
 tensorflow
