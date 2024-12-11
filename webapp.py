@@ -181,7 +181,7 @@ df[columns_to_scale] = scaler.transform(df[columns_to_scale])
 
 
 if st.button("Predict"):
-    neural_model = tf.keras.models.load_model('c:\\Kaggle laptop\\laptop_model.keras')
+    neural_model = tf.keras.models.load_model('laptop_model.keras')
     with open('random_forest_model.pkl', 'rb') as f:
         rfc_model = pickle.load(f)
     with open('linear_regression_model.pkl', 'rb') as f:
