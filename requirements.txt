@@ -2,3 +2,5 @@ joblib
 pandas
 numpy
 tensorflow
+tensorflow.python.keras.models
+sklearn.preprocessing
